@@ -1,0 +1,20 @@
+meta {
+  name: Test Routes
+  type: http
+  seq: 9
+}
+
+get {
+  url: http://localhost:5173/api/product/getuseOrder/66445113b053ebdf048971ee/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Toy",
+    "description": "nice toy",
+    "price": 123,
+    "picture": "abc"  
+  }
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Get product details
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:3000/product/6644b6c19fbe48e26e5525e1/6644c1099fbe48e26e5525e8
+  body: none
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Toy",
+    "description": "nice toy",
+    "price": 123,
+    "picture": "abc"  
+  }
+}

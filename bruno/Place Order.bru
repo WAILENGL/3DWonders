@@ -1,0 +1,16 @@
+meta {
+  name: Place Order
+  type: http
+  seq: 10
+}
+
+patch {
+  url: http://localhost:3000/api/product/6645b0581230c397e60f40d0/paid
+  body: json
+  auth: none
+}
+
+body:json {
+  { "paidStatus": "true"
+  }
+}
