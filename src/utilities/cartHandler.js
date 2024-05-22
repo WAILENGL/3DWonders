@@ -8,7 +8,7 @@ import { produce } from "immer";
 
 export const handleCart = async (type, cartState, quantity, productId) => {
   const orderLineFinder = finder(cartState, productId);
-  console.log(orderLineFinder, cartState, quantity);
+  console.log(orderLineFinder, cartState, quantity, productId);
 
   if (orderLineFinder !== -1) {
     const currentQty = cartState.orderLine[orderLineFinder].orderQty;
@@ -32,7 +32,12 @@ export const handleCart = async (type, cartState, quantity, productId) => {
       nextState.orderLine[orderLineFinder],
       nextState._id,
     );
-    console.log(updatedCart, nextState.orderLine[orderLineFinder], nextState);
+    console.log(
+      "this",
+      updatedCart,
+      nextState.orderLine[orderLineFinder],
+      nextState,
+    );
     return nextState;
   } else {
     const orderLine = {

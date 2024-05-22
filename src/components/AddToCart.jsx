@@ -5,9 +5,10 @@ import {useAtom,useAtomValue} from "jotai"
 import { cartItems } from "../../atom";
 import { loginSts } from "../../atom";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
 // import { getCartDetails } from "../utilities/cart-service"
 import { handleCart } from "../utilities/cartHandler";
+import { getCartDetails } from "../utilities/cart-service";
 
 // const log = debug("mern:pages:AddToCart");
 
@@ -21,7 +22,7 @@ export default function AddToCart({ productId }) {
   function handleIncreaseQty() {
     setQuantity((prevQuantity) => prevQuantity + 1);
   }
-
+  console.log(cartState)
   function handleDecreaseQty() {
     if (quantity > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
@@ -40,6 +41,15 @@ const handleAddToCart = async (event) =>
     navigate("/auth")
   }
 }
+
+  useEffect(() => {
+    async function getDetails() {
+      let results = await getCartDetails();
+      setCartState(results);
+    }
+    // console.log("here before")
+    getDetails();
+  }, [setCartState]);
 
   return (
     <div>

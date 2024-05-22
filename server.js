@@ -1,9 +1,7 @@
 const express = require("express");
 const path = require("path");
-// const favicon = require("serve-favicon");
 const logger = require("morgan");
 const debug = require("debug")("mern:server");
-// Always require and configure near the top
 require("dotenv").config();
 require("./config/database");
 
@@ -11,11 +9,10 @@ const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
+const publicPath = path.join(__dirname, "public");
+app.use("/public", express.static(publicPath));
 
-// Configure both serve-favicon & static middleware
-// to serve from the production 'build' folder
-// app.use(favicon(path.join(__dirname, "dist", "vite.svg")));
-// app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "dist")));
 app.use(require("./config/checkToken").checkTokenMiddleware);
 // Put API routes here, before the "catch all" route
 app.get("/api", (req, res) => {

@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import sendRequest from '../../utilities/send-request';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { loginSts, cartItems } from '../../../atom';
+import { getCartDetails } from '../../utilities/cart-service';
 
 export default function CheckOutPage() {
 	const [customerDetails, setCustomerDetails] = useState(null);
 	const [orderDetails, setOrderDetails] = useState(null);
 	const goToResults = useNavigate();
-	const currentcartItems = useAtomValue(cartItems);
-	const orderid = currentcartItems._id;
 	const [user] = useAtom(loginSts);
-
+	const [cartState,setCartState] = useAtom(cartItems);
+	const orderid = cartState._id;
+	
 	useEffect(() => {
 		setCustomerDetails(user);
 	}, [user]);
@@ -19,6 +20,15 @@ export default function CheckOutPage() {
 	/* 	useEffect(() => {
 		setOrderDetails(currentcartItems);
 	}, [currentcartItems]);  */
+
+	useEffect(() => {
+		async function getDetails() {
+		  let results = await getCartDetails();
+		  setCartState(results);
+		}
+		// console.log("here before")
+		getDetails();
+	  }, [setCartState]);
 
 	useEffect(() => {
 		const fetchOrderDetails = async () => {
@@ -31,27 +41,14 @@ export default function CheckOutPage() {
 		};
 		fetchOrderDetails();
 	}, [user]);
-
+	console.log(orderDetails)
 	async function handlePlaceOrderClick() {
 		try {
 			if (!user) {
 				goToResults('/login');
 				return;
 			}
-
-			// const response = await fetch(`/api/orders/${orderid}/${name}/paid`, {
-			// 	method: 'PATCH',
-			// 	headers: { 'Content-Type': 'application/json' },
-			// 	body: JSON.stringify({}),
-
-			// });
 			await sendRequest(`/api/orders/${orderid}/paid`, 'PATCH');
-			// console.log(response.ok)
-			// // sendRequest(`/api/orders/${orderid}/${name}/paid`,"PATCH")
-			// if (!response.ok) {
-			// 	throw new Error('Error updating order status');
-			// }
-
 			goToResults(`/user/thankyou`, {
 				state: {
 					orderDetails: orderDetails,

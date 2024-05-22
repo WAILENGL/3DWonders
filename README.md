@@ -2,7 +2,7 @@
 
 ## Introduction
 
-An E-commerce project developed by three software develpoers using MERN stack.
+An E-commerce project developed by three software developers using MERN stack.
 
 ## User Stories
 
@@ -48,7 +48,7 @@ Public Board: [Trello](https://trello.com/b/8imCDxxA/project-3)
 - Figma (Wireframe)
 - Trello (Public Board)
 - Render (Online Deployment)
-- JWT
+- JWT (Authentication)
 - Git and Github
 - Visual Studio Code
 - Vite
@@ -56,7 +56,7 @@ Public Board: [Trello](https://trello.com/b/8imCDxxA/project-3)
 ## Technical Description
 
 - A MERN stack app
-- Have three data entities (Models)
+- Three data entities (Models)
 - Data operations including CREATE, READ, UPDATE, and DELETE
 - Authenticate users using JWT
 - Be deployed online
@@ -77,9 +77,7 @@ Public Board: [Trello](https://trello.com/b/8imCDxxA/project-3)
 
 ## Screenshots
 
-## Getting Started
-
-[Render](https://p3-2g7d.onrender.com/)
+## [Getting Started](https://p3-2g7d.onrender.com/)
 
 ## Contributor:
 

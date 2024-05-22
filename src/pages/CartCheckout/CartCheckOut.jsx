@@ -51,9 +51,6 @@ console.log(userid)
 	useEffect(() => {
 		async function getDetails() {
 			let results = await getCartDetails(userDetails._id);
-			console.log(results);
-			// const finder = results?.findIndex(item => item.paidStatus === false)
-			// console.log(finder)
 			setCartState(results);
 		}
 		// console.log("here before")
