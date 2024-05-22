@@ -7,6 +7,7 @@ import { loginSts } from '../../../atom';
 
 // import NewOrderPage from "../NewOrderPage/NewOrderPage";
 // import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
+import AdminViewOrderDetails from '../AdminViewOrderDetails/AdminViewOrderDetails';
 import UserProfile from '../UserProfile/UserProfile';
 import HomePage from '../HomePage/HomePage';
 import ProductListingPage from '../ProductListingPage/ProductListingPage';
@@ -46,6 +47,7 @@ function App() {
     return (
     <Routes>
 	<Route path="/admin" element={<AdminPage />}/>
+	<Route path="/admin/vieworder/:orderid" element={<AdminViewOrderDetails />}/>
       <Route path="/" element={<HomePage />}/>
       <Route path="/products" element={<ProductListingPage />}/>
       <Route path="/user/" element={<UserProfile />}/>

@@ -1,64 +1,102 @@
 import {useAtomValue} from "jotai"
 import { loginSts } from "../../../../atom";
 
-import { createProduct } from "../../../utilities/product-service";
-
 import { useState } from "react";
+
+import AdminCreateProduct from "../../AdminCreateProduct/AdminCreateProduct";
+import AdminViewOrder from "../../../components/AdminViewOrder/AdminViewOrder";
+import AdminDeleteProduct from "../../../components/AdminDeleteProduct/AdminDeleteProduct";
+
+
+import { Fragment } from 'react'
+import { Popover, Transition } from '@headlessui/react'
+import { ChevronDownIcon, ClockIcon} from '@heroicons/react/20/solid'
+import {
+  CursorArrowRaysIcon,
+  SquaresPlusIcon,
+} from '@heroicons/react/24/outline'
+
+const solutions = [
+  { name: 'Create Product', description: 'Tool for creating customized products.', href: '#', icon: SquaresPlusIcon },
+  { name: 'View Customer Order', description: `Display of customer's order details`, href: '#', icon: CursorArrowRaysIcon },
+  { name: 'Delete Prodcut', description: "Removing product from database", href: '#', icon: ClockIcon }]
 
 export default function AdminPage()
 {
     const userDetails = useAtomValue(loginSts);
-    const { usertype } = userDetails
-    console.log(userDetails,usertype)
+    const { usertype } = userDetails;
 
-    const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        price: '',
-        picture: ''
-      });
+    const [pageState, setPageState] = useState("")
 
-    const handleChange = (event) =>
+    const handleClick = (event) =>
     {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value,
-          });
+      const eventHandler = event.target.getAttribute("name")
+      if(eventHandler === "Create Product")
+      {
+        setPageState(<AdminCreateProduct/>)
+      }
+      else if (eventHandler === "View Customer Order"){
+        setPageState(<AdminViewOrder/>)
+      }
+      else if (eventHandler === "Delete Prodcut"){
+        setPageState(<AdminDeleteProduct/>)
+      }
+      
     }
 
-    const handleSubmit = (event) =>
-    {
-        event.preventDefault();
-        createProduct(formData)
-    }
+    // console.log(userDetails,usertype)
 
-    if(usertype !== "admin")
+    const AdminPage = () =>
     {
-        return(<h1>Sorry you have no access to this page!</h1>)
-    }
+      if(usertype !== "admin")
+      {
+          return(<h1>Sorry you have no access to this page!</h1>)
+      }
+      else{
+          return <Popover className="relative">
+      <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+        <span>Welcome Admin, What would you like to do ?</span>
+        <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+      </Popover.Button>
 
-    return(<div>
-        <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",justifyContent:"center",alignContent:"center"}}>
-        <label>
-          Title:
-          <input className="border-4 border-indigo-500/100" type="text" name="title" value={formData.title} onChange={handleChange} />
-        </label>
-        <br />
-        <label>
-          Description:
-          <input  className="border-4 border-indigo-500/100" type="text" name="description" value={formData.description} onChange={handleChange} />
-        </label>
-        <br />
-        <label>
-          Price:
-          <input className="border-4 border-indigo-500/100" type="number" name="price" value={formData.price} onChange={handleChange} />
-        </label>
-        <br />
-        <label>
-          Picture:
-          <input className="border-4 border-indigo-500/100" type="text" name="picture" value={formData.picture} onChange={handleChange} />
-        </label>
-        <br />
-        <button type="submit" className="border-solid border-2 border-sky-500">Submit your product</button>
-      </form></div>)
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-200"
+        enterFrom="opacity-0 translate-y-1"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition ease-in duration-150"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-1"
+      >
+        <Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
+          <div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+            <div className="p-4">
+              {solutions.map((item) => (
+                <div key={item.name} className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                  <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                    <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                  </div>
+                  <div >
+                    <a href={item.href} className="font-semibold text-gray-900">
+                      {item.name} 
+                      <span className="absolute inset-0" onClick={handleClick} name={item.name}/>
+                    </a>
+                    <p className="mt-1 text-gray-600">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Popover.Panel>
+      </Transition>
+    </Popover>
+
+      }
+    }
+    
+
+    return(<>
+    <AdminPage/><div style={{margin:"50px"}}>{pageState}</div>
+    
+    </>)
 }

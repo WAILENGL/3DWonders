@@ -41,8 +41,23 @@ const createProduct = async (req, res) => {
   }
 };
 
+const deleteProduct = async (req, res) => {
+  const { productId } = req.params;
+  console.log("deleteProduct????", productId);
+  try {
+    await Data.Product.findOneAndDelete({ _id: productId });
+    res
+      .status(201)
+      .json({ message: `Product ID ${productId} Deleted Successfully` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error deleting product" });
+  }
+};
+
 module.exports = {
   index,
   productDetails,
   createProduct,
+  deleteProduct,
 };

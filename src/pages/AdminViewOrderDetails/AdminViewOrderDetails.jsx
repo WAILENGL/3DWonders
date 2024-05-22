@@ -12,7 +12,7 @@ export default function AdminViewOrderDetails()
 
     const currentOrder = useAtomValue(adminUserOrder);
     const [currentViewOrder,setCurrentViewOrder] = useAtom(adminUserOrder);
-
+    console.log(currentViewOrder)
     const finder = currentOrder.findIndex(item => item._id === orderid)
     console.log(finder)
     const handleChange = (e) =>

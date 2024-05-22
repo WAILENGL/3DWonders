@@ -45,8 +45,12 @@ export const login = async (email, password) => {
   const token = await usersAPI.login(user);
   log("token: %o", token);
 
-  localStorage.setItem("token", token);
-  return getUser();
+  if (token !== "error") {
+    localStorage.setItem("token", token);
+    return getUser();
+  } else {
+    return token;
+  }
 };
 
 export const checkToken = async () => {

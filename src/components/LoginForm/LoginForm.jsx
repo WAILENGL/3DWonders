@@ -7,6 +7,7 @@ const log = debug("mern:components:LoginForm");
 export default function LoginForm({ setUser,setLoginState }) {
   // const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [displayMsg, setdisplayMsg] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     
@@ -16,7 +17,14 @@ export default function LoginForm({ setUser,setLoginState }) {
     log("data: %o", data);
     const { email, password } = data;
     const user = await login(email, password);
-    setUser(user);
+    if(user !== "error")
+    {
+      setUser(user);
+      setdisplayMsg("")
+    }
+    else{
+      setdisplayMsg("Invalid credentials ! ")
+    }
   };
 
   const handleAlert =() =>
@@ -93,6 +101,7 @@ export default function LoginForm({ setUser,setLoginState }) {
             <input
               id="email"
               name="email"
+              style={{textIndent:"10px"}}
               // type="email"
               // autoComplete="email"
               required
@@ -118,6 +127,7 @@ export default function LoginForm({ setUser,setLoginState }) {
               id="password"
               name="password"
               type="password"
+              style={{textIndent:"10px"}}
               autoComplete="current-password"
               required
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -133,6 +143,7 @@ export default function LoginForm({ setUser,setLoginState }) {
             Sign in
           </button>
         </div>
+        <p className="flex w-full justify-center text-red-700">{displayMsg}</p>
       </form>
 
       <p className="mt-10 text-center text-sm text-gray-500">

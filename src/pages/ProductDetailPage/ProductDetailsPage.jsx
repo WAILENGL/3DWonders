@@ -64,16 +64,16 @@ export default function ProductDetailsPage() {
 
   return (
     <>
-      <div>
-        <img src={product.picture} alt={product.title} />
+      <div style={{display:"flex",flexDirection:"row",alignContent:"center",justifyContent:"center"}}>
+        <img style={{width:"50%"}} src={product.picture} alt={product.title} />
       </div>
       <div className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
         {product.title}
       </div>
-      <div className="text-3xl tracking-tight text-gray-900">
+      <div className="text-2xl tracking-tight text-gray-900">
         {product.price}
       </div>
-      <div className="text-sm font-medium text-gray-900">
+      <div className="text-sm font-small text-gray-900">
         {product.description}
       </div>
       <hr />

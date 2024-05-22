@@ -94,6 +94,7 @@ const deleteOrder = async (req, res) => {
 };
 
 const getOrder = async (req, res) => {
+  console.log("this?");
   const products = await Data.Order.find({})
     .populate({
       path: "orderLine.product_id",

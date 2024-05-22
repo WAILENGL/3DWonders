@@ -50,11 +50,11 @@ export default function AddToCart({ productId }) {
   }, [setCartState]);
 
   return (
-    <div>
+    <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
       <div className="text-lg font-medium text-gray-900" id="slide-over-title">
         Quantity
       </div>
-      <p className="text-gray-500">{quantity}</p>
+      <p className="text-gray-500 border-emerald-200 border-2 w-8 text-center">{quantity}</p>
       <button
         onClick={handleIncreaseQty}
         className="border-0	border-black w-6 hover:bg-green-200 text-black"

@@ -35,7 +35,7 @@ export default class SignUpForm extends Component {
       this.props.setUser(user);
       //! to decide where to navigate
     } catch (error) {
-      this.setState({ error: "Sign Up Failed" });
+      this.setState({ error: "Sign Up Failed, Email already in use " });
     }
   };
 
@@ -57,7 +57,7 @@ export default class SignUpForm extends Component {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" action="#" method="POST" onSubmit={this.handleSubmit}>
         <div>
-            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900" >
               Name
             </label>
             <div className="mt-2">
@@ -65,6 +65,7 @@ export default class SignUpForm extends Component {
                 id="name"
                 name="name"
                 required
+                style={{textIndent:"10px"}}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={this.state.name}
                 onChange={this.handleChange}
@@ -81,6 +82,7 @@ export default class SignUpForm extends Component {
                 id="username"
                 name="username"
                 required
+                style={{textIndent:"10px"}}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={this.state.username}
                 onChange={this.handleChange}
@@ -97,6 +99,7 @@ export default class SignUpForm extends Component {
                 id="password"
                 name="password"
                 required
+                style={{textIndent:"10px"}}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={this.state.password}
                 onChange={this.handleChange}
@@ -113,6 +116,7 @@ export default class SignUpForm extends Component {
                 id="confirm"
                 name="confirm"
                 required
+                style={{textIndent:"10px"}}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={this.state.confirm}
                 onChange={this.handleChange}
@@ -128,7 +132,8 @@ export default class SignUpForm extends Component {
               <input
                 id="usertype"
                 name="usertype"
-                placeholder=" Input token for admin"
+                placeholder="Input token for admin"
+                style={{textIndent:"10px"}}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={this.state.usertype}
                 onChange={this.handleChange}
@@ -147,6 +152,7 @@ export default class SignUpForm extends Component {
                 name="email"
                 type="email"
                 // autoComplete="email"
+                style={{textIndent:"10px"}}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={this.state.email}
@@ -169,6 +175,7 @@ export default class SignUpForm extends Component {
                 name="address"
                 type="address"
                 autoComplete="current-password"
+                style={{textIndent:"10px"}}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={this.state.address}
@@ -176,7 +183,7 @@ export default class SignUpForm extends Component {
               />
             </div>
           </div>
-  
+          <p className="flex w-full justify-center text-red-700">{this.state.error}</p>
           <div>
             <button
               type="submit"
@@ -184,7 +191,9 @@ export default class SignUpForm extends Component {
             >
               Create Account
             </button>
+            
           </div>
+          
         </form>
   
         <p className="mt-10 text-center text-sm text-gray-500">
