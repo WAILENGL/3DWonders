@@ -102,3 +102,11 @@ Public Board: [Trello](https://trello.com/b/8imCDxxA/project-3)
 #### WAILENGL
 
 #### Miaoling Mai
+
+The biggest challenge in developing a project with the team is the Team Git Workflow. We need to maintain communication to align on what features each member is developing and approximately when they will complete their work. Frequent commits are necessary to reduce conflicts during the branch merge process.
+
+Aside from this, team development has many benefits: team members can openly and deeply discuss ideas, wireframe, data model, and infrastructure design, which gives me a lot of inspiration. Additionally, when troubleshooting is needed, my team members help analyze the problem and try to solve it together.
+
+## Acknowledgments
+
+We need to thank our instructors Simon and Faith for their suggestions, feedback, and assistance throughout our development process!

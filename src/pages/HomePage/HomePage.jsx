@@ -1,25 +1,22 @@
 /* eslint-disable react/no-unescaped-entities */
 import PopularItems from "../../components/PopularItems";
 import { useEffect } from "react";
-import {useAtom} from "jotai"
+import { useAtom } from "jotai";
 import { cartItems } from "../../../atom";
 import sendRequest from "../../utilities/send-request";
 
 export default function HomePage() {
-  const [cartState,setCartState] = useAtom(cartItems);
+  const [cartState, setCartState] = useAtom(cartItems);
 
-
-  console.log(cartState)
+  console.log(cartState);
   useEffect(() => {
-    async function getDetails()
-      {
-        const cartItems = await sendRequest(`/api/orders/getUserOrders/`);
-        setCartState(cartItems);
-      }
-      getDetails();   
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    async function getDetails() {
+      const cartItems = await sendRequest(`/api/orders/getUserOrders/`);
+      setCartState(cartItems);
+    }
+    getDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   return (
     <>
@@ -28,8 +25,11 @@ export default function HomePage() {
         alt="Banner"
       />
       <div>
-        <h1>About Us:</h1>
-        <p>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          About Us:
+        </h1>
+
+        <p className="mt-4 text-xl text-gray-500">
           Welcome to TrendyHub, your number one source for the latest and
           greatest in fashion. We are dedicated to providing you the best of
           apparel, with a focus on quality, customer service, and uniqueness.

@@ -13,8 +13,6 @@ export default function ProductDetailsPage() {
   const [error, setError] = useState(null);
   const { productId } = useParams();
 
-
-
   useEffect(() => {
     async function loadProduct() {
       setLoading(true);
@@ -69,12 +67,17 @@ export default function ProductDetailsPage() {
       <div>
         <img src={product.picture} alt={product.title} />
       </div>
-      <div>{product.title}</div>
-      <div>{product.price}</div>
-      <div>{product.description}</div>
+      <div className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+        {product.title}
+      </div>
+      <div className="text-3xl tracking-tight text-gray-900">
+        {product.price}
+      </div>
+      <div className="text-sm font-medium text-gray-900">
+        {product.description}
+      </div>
       <hr />
       <AddToCart productId={productId} />
-      {/* <AddToCart productId={productId} userId={userId} /> */}
     </>
   );
 }
